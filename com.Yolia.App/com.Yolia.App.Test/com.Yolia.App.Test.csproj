@@ -50,8 +50,16 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <Compile Include="Mock\ClienteMock.cs" />
+    <Compile Include="Mock\Util.cs" />
     <Compile Include="UnitTest1.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\com.Yolia.App.Data\com.Yolia.App.Data.csproj">
+      <Project>{442E9340-6614-456A-93A2-EAC352A8DCAA}</Project>
+      <Name>com.Yolia.App.Data</Name>
+    </ProjectReference>
   </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">

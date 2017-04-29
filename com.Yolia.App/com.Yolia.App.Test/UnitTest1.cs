@@ -19,7 +19,8 @@ namespace com.Yolia.App.Test
         public void SaveTest()
         {
             var dto = Mock.ClienteMock.New;
-
+            var dtoSaved = service.Save(dto);
+            Assert.IsNotNull(dtoSaved);
         }
     }
 }

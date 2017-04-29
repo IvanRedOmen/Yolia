@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "com.Yolia.App", "com.Yolia.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "com.Yolia.App.Data", "com.Yolia.App.Data\com.Yolia.App.Data.csproj", "{442E9340-6614-456A-93A2-EAC352A8DCAA}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "com.Yolia.App.Test", "com.Yolia.App.Test\com.Yolia.App.Test.csproj", "{77AF107C-4184-4576-8C26-F623E8A38135}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{442E9340-6614-456A-93A2-EAC352A8DCAA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{442E9340-6614-456A-93A2-EAC352A8DCAA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{442E9340-6614-456A-93A2-EAC352A8DCAA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{77AF107C-4184-4576-8C26-F623E8A38135}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{77AF107C-4184-4576-8C26-F623E8A38135}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{77AF107C-4184-4576-8C26-F623E8A38135}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{77AF107C-4184-4576-8C26-F623E8A38135}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
