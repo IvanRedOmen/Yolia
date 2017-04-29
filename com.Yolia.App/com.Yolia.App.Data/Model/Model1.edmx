@@ -1,0 +1,295 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="YoliaProdModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="ClienteSet">
+          <Key>
+            <PropertyRef Name="ClienteId" />
+          </Key>
+          <Property Name="ClienteId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ClienteRFC" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Nombre" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="ApellidoPaterno" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="ApellidoMaterno" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="NumFijo" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="NumMovil" Type="nvarchar(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="DomicilioSet">
+          <Key>
+            <PropertyRef Name="DomicilioId" />
+          </Key>
+          <Property Name="DomicilioId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Calle" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="NumInterior" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="NumExterior" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Colonia" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Estado" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="CodPostal" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="ClienteClienteId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PagoSet">
+          <Key>
+            <PropertyRef Name="FolioPago" />
+          </Key>
+          <Property Name="FolioPago" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ClavePago" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="MontoPago" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="FechaPago" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ServicioSet">
+          <Key>
+            <PropertyRef Name="FolioServicio" />
+          </Key>
+          <Property Name="FolioServicio" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FechaIniServicio" Type="datetime" Nullable="false" />
+          <Property Name="FechaFinServicio" Type="datetime" Nullable="false" />
+          <Property Name="TipoServicio" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="ClienteClienteId" Type="int" Nullable="false" />
+          <Property Name="Pago_FolioPago" Type="int" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_ClienteDomicilio">
+          <End Role="ClienteSet" Type="Self.ClienteSet" Multiplicity="1" />
+          <End Role="DomicilioSet" Type="Self.DomicilioSet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ClienteSet">
+              <PropertyRef Name="ClienteId" />
+            </Principal>
+            <Dependent Role="DomicilioSet">
+              <PropertyRef Name="ClienteClienteId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ClienteServicio">
+          <End Role="ClienteSet" Type="Self.ClienteSet" Multiplicity="1" />
+          <End Role="ServicioSet" Type="Self.ServicioSet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ClienteSet">
+              <PropertyRef Name="ClienteId" />
+            </Principal>
+            <Dependent Role="ServicioSet">
+              <PropertyRef Name="ClienteClienteId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ServicioPago">
+          <End Role="PagoSet" Type="Self.PagoSet" Multiplicity="1" />
+          <End Role="ServicioSet" Type="Self.ServicioSet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PagoSet">
+              <PropertyRef Name="FolioPago" />
+            </Principal>
+            <Dependent Role="ServicioSet">
+              <PropertyRef Name="Pago_FolioPago" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="YoliaProdModelStoreContainer">
+          <EntitySet Name="ClienteSet" EntityType="Self.ClienteSet" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DomicilioSet" EntityType="Self.DomicilioSet" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PagoSet" EntityType="Self.PagoSet" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ServicioSet" EntityType="Self.ServicioSet" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_ClienteDomicilio" Association="Self.FK_ClienteDomicilio">
+            <End Role="ClienteSet" EntitySet="ClienteSet" />
+            <End Role="DomicilioSet" EntitySet="DomicilioSet" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ClienteServicio" Association="Self.FK_ClienteServicio">
+            <End Role="ClienteSet" EntitySet="ClienteSet" />
+            <End Role="ServicioSet" EntitySet="ServicioSet" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ServicioPago" Association="Self.FK_ServicioPago">
+            <End Role="PagoSet" EntitySet="PagoSet" />
+            <End Role="ServicioSet" EntitySet="ServicioSet" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="YoliaProdModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="ClienteSet">
+          <Key>
+            <PropertyRef Name="ClienteId" />
+          </Key>
+          <Property Name="ClienteId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ClienteRFC" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Nombre" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ApellidoPaterno" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ApellidoMaterno" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="NumFijo" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="NumMovil" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="DomicilioSet" Relationship="Self.FK_ClienteDomicilio" FromRole="ClienteSet" ToRole="DomicilioSet" />
+          <NavigationProperty Name="ServicioSet" Relationship="Self.FK_ClienteServicio" FromRole="ClienteSet" ToRole="ServicioSet" />
+        </EntityType>
+        <EntityType Name="DomicilioSet">
+          <Key>
+            <PropertyRef Name="DomicilioId" />
+          </Key>
+          <Property Name="DomicilioId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Calle" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="NumInterior" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="NumExterior" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Colonia" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Estado" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="CodPostal" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ClienteClienteId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="ClienteSet" Relationship="Self.FK_ClienteDomicilio" FromRole="DomicilioSet" ToRole="ClienteSet" />
+        </EntityType>
+        <EntityType Name="PagoSet">
+          <Key>
+            <PropertyRef Name="FolioPago" />
+          </Key>
+          <Property Name="FolioPago" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ClavePago" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="MontoPago" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="FechaPago" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="ServicioSet" Relationship="Self.FK_ServicioPago" FromRole="PagoSet" ToRole="ServicioSet" />
+        </EntityType>
+        <EntityType Name="ServicioSet">
+          <Key>
+            <PropertyRef Name="FolioServicio" />
+          </Key>
+          <Property Name="FolioServicio" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FechaIniServicio" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="FechaFinServicio" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="TipoServicio" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ClienteClienteId" Type="Int32" Nullable="false" />
+          <Property Name="Pago_FolioPago" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="ClienteSet" Relationship="Self.FK_ClienteServicio" FromRole="ServicioSet" ToRole="ClienteSet" />
+          <NavigationProperty Name="PagoSet" Relationship="Self.FK_ServicioPago" FromRole="ServicioSet" ToRole="PagoSet" />
+        </EntityType>
+        <Association Name="FK_ClienteDomicilio">
+          <End Role="ClienteSet" Type="Self.ClienteSet" Multiplicity="1" />
+          <End Role="DomicilioSet" Type="Self.DomicilioSet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ClienteSet">
+              <PropertyRef Name="ClienteId" />
+            </Principal>
+            <Dependent Role="DomicilioSet">
+              <PropertyRef Name="ClienteClienteId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ClienteServicio">
+          <End Role="ClienteSet" Type="Self.ClienteSet" Multiplicity="1" />
+          <End Role="ServicioSet" Type="Self.ServicioSet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ClienteSet">
+              <PropertyRef Name="ClienteId" />
+            </Principal>
+            <Dependent Role="ServicioSet">
+              <PropertyRef Name="ClienteClienteId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ServicioPago">
+          <End Role="PagoSet" Type="Self.PagoSet" Multiplicity="1" />
+          <End Role="ServicioSet" Type="Self.ServicioSet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PagoSet">
+              <PropertyRef Name="FolioPago" />
+            </Principal>
+            <Dependent Role="ServicioSet">
+              <PropertyRef Name="Pago_FolioPago" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="YoliaEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="ClienteSet" EntityType="Self.ClienteSet" />
+          <EntitySet Name="DomicilioSet" EntityType="Self.DomicilioSet" />
+          <EntitySet Name="PagoSet" EntityType="Self.PagoSet" />
+          <EntitySet Name="ServicioSet" EntityType="Self.ServicioSet" />
+          <AssociationSet Name="FK_ClienteDomicilio" Association="Self.FK_ClienteDomicilio">
+            <End Role="ClienteSet" EntitySet="ClienteSet" />
+            <End Role="DomicilioSet" EntitySet="DomicilioSet" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ClienteServicio" Association="Self.FK_ClienteServicio">
+            <End Role="ClienteSet" EntitySet="ClienteSet" />
+            <End Role="ServicioSet" EntitySet="ServicioSet" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ServicioPago" Association="Self.FK_ServicioPago">
+            <End Role="PagoSet" EntitySet="PagoSet" />
+            <End Role="ServicioSet" EntitySet="ServicioSet" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="YoliaProdModelStoreContainer" CdmEntityContainer="YoliaEntities">
+          <EntitySetMapping Name="ClienteSet">
+            <EntityTypeMapping TypeName="YoliaProdModel.ClienteSet">
+              <MappingFragment StoreEntitySet="ClienteSet">
+                <ScalarProperty Name="ClienteId" ColumnName="ClienteId" />
+                <ScalarProperty Name="ClienteRFC" ColumnName="ClienteRFC" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="ApellidoPaterno" ColumnName="ApellidoPaterno" />
+                <ScalarProperty Name="ApellidoMaterno" ColumnName="ApellidoMaterno" />
+                <ScalarProperty Name="NumFijo" ColumnName="NumFijo" />
+                <ScalarProperty Name="NumMovil" ColumnName="NumMovil" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DomicilioSet">
+            <EntityTypeMapping TypeName="YoliaProdModel.DomicilioSet">
+              <MappingFragment StoreEntitySet="DomicilioSet">
+                <ScalarProperty Name="DomicilioId" ColumnName="DomicilioId" />
+                <ScalarProperty Name="Calle" ColumnName="Calle" />
+                <ScalarProperty Name="NumInterior" ColumnName="NumInterior" />
+                <ScalarProperty Name="NumExterior" ColumnName="NumExterior" />
+                <ScalarProperty Name="Colonia" ColumnName="Colonia" />
+                <ScalarProperty Name="Estado" ColumnName="Estado" />
+                <ScalarProperty Name="CodPostal" ColumnName="CodPostal" />
+                <ScalarProperty Name="ClienteClienteId" ColumnName="ClienteClienteId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PagoSet">
+            <EntityTypeMapping TypeName="YoliaProdModel.PagoSet">
+              <MappingFragment StoreEntitySet="PagoSet">
+                <ScalarProperty Name="FolioPago" ColumnName="FolioPago" />
+                <ScalarProperty Name="ClavePago" ColumnName="ClavePago" />
+                <ScalarProperty Name="MontoPago" ColumnName="MontoPago" />
+                <ScalarProperty Name="FechaPago" ColumnName="FechaPago" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ServicioSet">
+            <EntityTypeMapping TypeName="YoliaProdModel.ServicioSet">
+              <MappingFragment StoreEntitySet="ServicioSet">
+                <ScalarProperty Name="FolioServicio" ColumnName="FolioServicio" />
+                <ScalarProperty Name="FechaIniServicio" ColumnName="FechaIniServicio" />
+                <ScalarProperty Name="FechaFinServicio" ColumnName="FechaFinServicio" />
+                <ScalarProperty Name="TipoServicio" ColumnName="TipoServicio" />
+                <ScalarProperty Name="ClienteClienteId" ColumnName="ClienteClienteId" />
+                <ScalarProperty Name="Pago_FolioPago" ColumnName="Pago_FolioPago" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
