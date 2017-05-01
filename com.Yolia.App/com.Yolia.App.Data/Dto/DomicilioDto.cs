@@ -1,8 +1,9 @@
-﻿using Nelibur.ObjectMapper;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using com.Yolia.App.Data.Model;
+using Nelibur.ObjectMapper;
 using System.Threading.Tasks;
 
 namespace com.Yolia.App.Data.Dto
@@ -19,29 +20,36 @@ namespace com.Yolia.App.Data.Dto
         public string CodPostal { get; set; }
         public int ClienteClienteId { get; set; }
 
-        public DomicilioDto()
+        internal static List<DomicilioDto> ToMap(List<Domicilio> listEntity)
         {
-
-        }
-
-        internal static List<DomicilioDto> ToMap(List<Model.Domicilio> listEntity)
-        {
-            List<DomicilioDto> listDto = (from e in listEntity select ToMap(e)).ToList();
+            List<DomicilioDto> listDto = (from entity in listEntity select ToMap(entity)).ToList();
             return listDto;
         }
-       
-        internal static DomicilioDto ToMap(Model.Domicilio entity)
+
+        internal static DomicilioDto ToMap(Domicilio entity)
         {
             if (entity == null) return null;
-            DomicilioDto dto = TinyMapper.Map<DomicilioDto>(entity);
+            TinyMapper.Bind<Domicilio, DomicilioDto>(config =>
+            {
+                config.Bind(a => a.DomicilioId, b => b.DomicilioId);
+            });
+            var dto = TinyMapper.Map<DomicilioDto>(entity);
             return dto;
-        }
 
-        internal static Model.Domicilio ToUnMap(DomicilioDto dto)
+        }
+        internal static Domicilio ToUnMap(DomicilioDto dto)
         {
-            TinyMapper.Bind<DomicilioDto, Model.Domicilio>();
-            Model.Domicilio entity = TinyMapper.Map<Model.Domicilio>(dto);
+            if (dto == null) return null;
+            TinyMapper.Bind<DomicilioDto, Domicilio>(config =>
+            {
+                config.Ignore(_dto => _dto.ClienteClienteId);
+                config.Bind(a => a.DomicilioId, b => b.DomicilioId);
+            });
+            Domicilio entity = TinyMapper.Map<Domicilio>(dto);
             return entity;
         }
+
     }
+
 }
+
