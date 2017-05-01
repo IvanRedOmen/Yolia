@@ -6,7 +6,7 @@ using System.Collections;
 namespace com.Yolia.App.Test
 {
     [TestClass]
-    public class UnitTest1
+    public class ClienteTest
     {
         ClienteService service;
 

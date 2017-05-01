@@ -92,7 +92,11 @@
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
     <Compile Include="Service\ClienteService.cs" />
+    <Compile Include="Service\DomicilioService.cs" />
     <Compile Include="Service\IClienteService.cs" />
+    <Compile Include="Service\IDomicilioService.cs" />
+    <Compile Include="Service\IPagoService.cs" />
+    <Compile Include="Service\IServicioService.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.Config" />

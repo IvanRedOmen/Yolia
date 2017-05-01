@@ -71,10 +71,14 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <Compile Include="DomicilioTest.cs" />
     <Compile Include="Mock\ClienteMock.cs" />
+    <Compile Include="Mock\DomicilioMock.cs" />
     <Compile Include="Mock\Util.cs" />
-    <Compile Include="UnitTest1.cs" />
+    <Compile Include="ClienteTest.cs" />
+    <Compile Include="PagoTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ServicioTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\com.Yolia.App.Data\com.Yolia.App.Data.csproj">

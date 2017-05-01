@@ -7,11 +7,11 @@ using System.Threading.Tasks;
 
 namespace com.Yolia.App.Data.Service
 {
-    public interface IClienteService
+    public interface IPagoService
     {
-        List<ClienteDto> GetAll();
-        ClienteDto Save(ClienteDto dto);
-        ClienteDto FindClienteById(int id);
-        ClienteDto Update(ClienteDto dto);
+        List<PagoDto> GetAll();
+        PagoDto Save(PagoDto dto);
+        PagoDto FindClienteById(int id);
+        PagoDto Update(PagoDto dto);
     }
 }
