@@ -1,6 +1,7 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using com.Yolia.App.Data.Service;
+using System.Collections;
 
 namespace com.Yolia.App.Test
 {
@@ -18,12 +19,16 @@ namespace com.Yolia.App.Test
         [TestMethod]
         public void SaveTest()
         {
-            for (int i = 0; i == 4; i++)
-            {
+            int i = 0;
+            ArrayList dtoSavedList = new ArrayList();
+            do {
                 var dto = Mock.ClienteMock.New;
                 var dtoSaved = service.Save(dto);
-                Assert.IsNotNull(dtoSaved);
+                dtoSavedList.Add(dtoSaved);
+                i = i + 1;
             }
+            while (i<=9);
+            Assert.IsNotNull(dtoSavedList);
         }
 
         [TestMethod]
@@ -49,6 +54,7 @@ namespace com.Yolia.App.Test
             {
                 var dto = list[0];
                 dto.Nombre = Mock.Util.GenerateWord(20);
+                dto.NumMovil = "5534343454";
                 var updated = service.Update(dto);
                 Assert.IsNotNull(updated);
             }

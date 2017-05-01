@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Nelibur.ObjectMapper;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -18,6 +19,29 @@ namespace com.Yolia.App.Data.Dto
         public string CodPostal { get; set; }
         public int ClienteClienteId { get; set; }
 
+        public DomicilioDto()
+        {
 
+        }
+
+        internal static List<DomicilioDto> ToMap(List<Model.Domicilio> listEntity)
+        {
+            List<DomicilioDto> listDto = (from e in listEntity select ToMap(e)).ToList();
+            return listDto;
+        }
+       
+        internal static DomicilioDto ToMap(Model.Domicilio entity)
+        {
+            if (entity == null) return null;
+            DomicilioDto dto = TinyMapper.Map<DomicilioDto>(entity);
+            return dto;
+        }
+
+        internal static Model.Domicilio ToUnMap(DomicilioDto dto)
+        {
+            TinyMapper.Bind<DomicilioDto, Model.Domicilio>();
+            Model.Domicilio entity = TinyMapper.Map<Model.Domicilio>(dto);
+            return entity;
+        }
     }
 }

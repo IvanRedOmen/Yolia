@@ -17,15 +17,17 @@ namespace com.Yolia.App.Data.Model
         public YoliaEntities()
             :base(Properties.Settings.Default.connectionString.ToString())
         {
-
         }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
-            // Configure Code First to ignore PluralizingTableName convention 
-            // If you keep this convention, the generated tables  
-            // will have pluralized names. 
             modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();
+            modelBuilder.Entity<Servicio>()
+                .HasKey(e => e.FolioServicio);
+
+            modelBuilder.Entity<Servicio>()
+                        .HasRequired(s => s.Pago)
+                        .WithRequiredPrincipal(ad => ad.Servicio);
         }
     }
 }

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -17,6 +18,6 @@ namespace com.Yolia.App.Data.Model
 
         public ICollection<Cliente> Cliente { get; set; }
 
-        public virtual ICollection<Pago> Pago { get; set; }
+        public virtual Pago Pago { get; set; }
     }
 }

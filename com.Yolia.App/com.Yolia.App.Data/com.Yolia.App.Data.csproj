@@ -65,6 +65,8 @@
   <ItemGroup>
     <Compile Include="Dto\ClienteDto.cs" />
     <Compile Include="Dto\DomicilioDto.cs" />
+    <Compile Include="Dto\PagoDto.cs" />
+    <Compile Include="Dto\ServicioDto.cs" />
     <Compile Include="Migrations\201705010536590_InitialCreate.cs" />
     <Compile Include="Migrations\201705010536590_InitialCreate.Designer.cs">
       <DependentUpon>201705010536590_InitialCreate.cs</DependentUpon>
@@ -72,6 +74,10 @@
     <Compile Include="Migrations\201705010546499_Update-database.cs" />
     <Compile Include="Migrations\201705010546499_Update-database.Designer.cs">
       <DependentUpon>201705010546499_Update-database.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201705011701064_pago-servicio.cs" />
+    <Compile Include="Migrations\201705011701064_pago-servicio.Designer.cs">
+      <DependentUpon>201705011701064_pago-servicio.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Model\Clientes.cs" />
@@ -105,6 +111,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201705010546499_Update-database.resx">
       <DependentUpon>201705010546499_Update-database.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201705011701064_pago-servicio.resx">
+      <DependentUpon>201705011701064_pago-servicio.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
