@@ -12,24 +12,56 @@ namespace com.Yolia.App.Data.Service
     {
         public List<ClienteDto> GetAll()
         {
-            throw new NotImplementedException();
+            List<ClienteDto> list = null;
+            using(var context = new YoliaEntities())
+            {
+                list = (from cl in context.Clientes.ToList<Cliente>()
+                        select ClienteDto.ToMap(cl)).ToList();
+            }
+            return list;
         }
 
         public ClienteDto Save(ClienteDto dto)
         {
-            ClienteSet entity = null;
+            Cliente entity = null;
             using (var context = new YoliaEntities())
             {
                 entity = ClienteDto.ToUnMap(dto);
-                entity.DomicilioSet = null;
-                entity.ServicioSet = null;
-                context.ClienteSet.Add(entity);
+                entity.Domicilios = null;
+                context.Clientes.Add(entity);
                 int nrecords = context.SaveChanges();
                 dto.ClienteId = entity.ClienteId;
                 if (nrecords <= 0)
                     return null;
             }
             return dto;
+        }
+
+        public ClienteDto FindClienteById(int id)
+        {
+            ClienteDto dto = null;
+            using(var context = new YoliaEntities())
+            {
+                dto = ClienteDto.ToMap(context.Clientes.Where
+                    (e => e.ClienteId == id).FirstOrDefault());
+            }
+            return dto;
+        }
+
+        public ClienteDto Update(ClienteDto dto)
+        {
+            ClienteDto updated = null;
+            using(var context = new YoliaEntities())
+            {
+                Cliente entity = ClienteDto.ToUnMap(dto);
+                context.Entry<Cliente>(entity).State = System.Data.Entity.EntityState.Modified;
+                int nrecords = context.SaveChanges();
+                if (nrecords > 0)
+                {
+                    updated = dto;
+                }
+            }
+            return updated;
         }
     }
 }

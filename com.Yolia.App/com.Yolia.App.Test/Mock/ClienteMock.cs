@@ -21,7 +21,7 @@ namespace com.Yolia.App.Test.Mock
                 dto.NumFijo = Util.GenerateWord(10);
                 dto.NumMovil = Util.GenerateWord(15);
                 dto.Domicilios = null;
-                dto.Servicios = null;
+                //dto.Servicios = null;
                 return dto;
             }
         }

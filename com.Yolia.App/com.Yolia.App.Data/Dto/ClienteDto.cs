@@ -23,35 +23,37 @@ namespace com.Yolia.App.Data.Dto
         public string NumFijo { get; set; }
         public string NumMovil { get; set; }
         public List<DomicilioDto> Domicilios { get; set; }
-        public List<ServicioDto> Servicios { get; set; }
 
-        internal static List<ClienteDto> ToMap(List<ClienteSet> listEntity)
+
+        internal static List<ClienteDto> ToMap(List<Cliente> listEntity)
         {
             List<ClienteDto> listDto = (from entity in listEntity select ToMap(entity)).ToList();
             return listDto;
         }
 
 
-        internal static ClienteDto ToMap(ClienteSet entity)
+        internal static ClienteDto ToMap(Cliente entity)
         {
             if (entity == null) return null;
-            TinyMapper.Bind<ClienteSet, ClienteDto>(config =>
-            {
-                config.Bind(a => a.ClienteId, b => b.ClienteId);
-            });
-            var dto = TinyMapper.Map<ClienteDto>(entity);
+            //TinyMapper.Bind<Cliente, ClienteDto>(config =>
+            //{
+            //    config.Bind(a => a.ClienteId, b => b.ClienteId);
+            //});
+            //var dto = TinyMapper.Map<ClienteDto>(entity);
+
+            TinyMapper.Bind<Domicilio, DomicilioDto>();
+            ClienteDto dto = TinyMapper.Map<ClienteDto>(entity);
             return dto;
         }
 
-        internal static ClienteSet ToUnMap(ClienteDto dto)
+        internal static Cliente ToUnMap(ClienteDto dto)
         {
             if (dto == null) return null;
-            TinyMapper.Bind<ClienteDto, ClienteSet>(config =>
+            TinyMapper.Bind<ClienteDto, Cliente>(config =>
             {
                 config.Ignore(_dto => _dto.Domicilios);
-                config.Bind(a => a.ClienteId, b => b.ClienteId);
             });
-            ClienteSet entity = TinyMapper.Map<ClienteSet>(dto);
+            Cliente entity = TinyMapper.Map<Cliente>(dto);
             return entity;
         }
 
