@@ -65,6 +65,15 @@
   <ItemGroup>
     <Compile Include="Dto\ClienteDto.cs" />
     <Compile Include="Dto\DomicilioDto.cs" />
+    <Compile Include="Migrations\201705010536590_InitialCreate.cs" />
+    <Compile Include="Migrations\201705010536590_InitialCreate.Designer.cs">
+      <DependentUpon>201705010536590_InitialCreate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201705010546499_Update-database.cs" />
+    <Compile Include="Migrations\201705010546499_Update-database.Designer.cs">
+      <DependentUpon>201705010546499_Update-database.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Model\Clientes.cs" />
     <Compile Include="Model\Domicilio.cs" />
     <Compile Include="Model\Pago.cs" />
@@ -90,7 +99,14 @@
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201705010536590_InitialCreate.resx">
+      <DependentUpon>201705010536590_InitialCreate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201705010546499_Update-database.resx">
+      <DependentUpon>201705010546499_Update-database.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
