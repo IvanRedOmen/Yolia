@@ -10,8 +10,8 @@ namespace com.Yolia.App.Data.Service
     public interface IPagoService
     {
         List<PagoDto> GetAll();
-        PagoDto Save(PagoDto dto);
-        PagoDto FindClienteById(int id);
+        PagoDto Save(int servicioId,PagoDto dto);
+        PagoDto FindPagobyId(int pagoId);
         PagoDto Update(PagoDto dto);
     }
 }

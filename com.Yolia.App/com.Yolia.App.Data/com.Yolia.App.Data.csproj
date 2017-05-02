@@ -97,6 +97,8 @@
     <Compile Include="Service\IDomicilioService.cs" />
     <Compile Include="Service\IPagoService.cs" />
     <Compile Include="Service\IServicioService.cs" />
+    <Compile Include="Service\PagoService.cs" />
+    <Compile Include="Service\ServicioService.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.Config" />

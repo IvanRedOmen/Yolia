@@ -10,8 +10,8 @@ namespace com.Yolia.App.Data.Service
     public interface IServicioService
     {
         List<ServicioDto> GetAll();
-        ServicioDto Save(ServicioDto dto);
-        ServicioDto FindClienteById(int id);
+        ServicioDto Save(int clienteId,ServicioDto dto);
+        ServicioDto FindServicioById(int id);
         ServicioDto Update(ServicioDto dto);
     }
 }

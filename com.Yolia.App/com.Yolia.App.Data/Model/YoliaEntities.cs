@@ -13,6 +13,8 @@ namespace com.Yolia.App.Data.Model
     {
         public DbSet<Cliente> Clientes { get; set; }
         public DbSet<Domicilio> Domicilios { get; set; }
+        public DbSet<Servicio> Servicios { get; set; }
+        public DbSet<Pago> Pagos { get; set; }
 
         public YoliaEntities()
             :base(Properties.Settings.Default.connectionString.ToString())
