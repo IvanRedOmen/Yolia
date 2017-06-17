@@ -1,0 +1,29 @@
+body{
+ background-image: url("../assets/ws_Red_and_White_2560x1600.jpg");
+ text-align:justify
+}
+
+
+*{
+cursor:crosshair;
+}
+
+h1 {
+    color:black:red;
+text-align:initial;
+text-decoration:underline;
+transition:all 1s cubic-bezier(.93,.11,.53,.76);
+-o-transition:all 1s cubic-bezier(.93,.11,.53,.76);
+-webkit-transition:all 1s cubic-bezier(.93,.11,.53,.76);
+-moz-transition:all 1s cubic-bezier(.93,.11,.53,.76);
+    margin-left: 80px;
+}
+
+h1:hover{
+
+    transform:rotate(720deg);
+    -webkit-transform:rotate(720deg);
+    -moz-transform:rotate(720deg);
+    -ms-transform:rotate(720);
+}
+         
