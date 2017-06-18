@@ -46,13 +46,17 @@ namespace com.Yolia.App.Data.Dto
         internal static Cliente ToUnMap(ClienteDto dto)
         {
             if (dto == null) return null;
-            TinyMapper.Bind<ClienteDto, Cliente>(config =>
-            {
-                config.Ignore(_dto => _dto.Domicilios);
-                config.Bind(a => a.ClienteId, b => b.ClienteId);
-            });
-            Cliente entity = TinyMapper.Map<Cliente>(dto);
-            return entity;
+                Cliente entity = new Cliente();
+                entity.ClienteRFC = dto.ClienteRFC;
+                entity.ApellidoPaterno = dto.ApellidoPaterno;
+                entity.ApellidoMaterno = dto.ApellidoMaterno;
+                entity.Nombre = dto.Nombre;
+                entity.NumFijo = dto.NumFijo;
+                entity.NumMovil = dto.NumMovil;
+            //entity.Domicilios = DomicilioDto.ToUnMap(dto.Domicilios.OfType<DomicilioDto>().ToList());
+            entity.Domicilios = DomicilioDto.ToMap(dto.Domicilios.ToList());
+                return entity;
+
         }
 
     }
