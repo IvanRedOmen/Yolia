@@ -19,7 +19,7 @@ namespace com.Yolia.App.Data.Model
         public string Estado { get; set; }
         public string CodPostal { get; set; }
 
-        public ICollection<Cliente> Cliente { get; set; }
+        public Cliente Cliente{ get; set; }
 
     }
 }

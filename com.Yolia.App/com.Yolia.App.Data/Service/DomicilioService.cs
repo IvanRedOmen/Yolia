@@ -42,7 +42,7 @@ namespace com.Yolia.App.Data.Service
                     Cliente cliente = context.Clientes.Where(e => e.ClienteId == clienteId).FirstOrDefault();
                     if (cliente != null)
                     {
-                        Domicilio entity = DomicilioDto.ToUnMap(dto);
+                        Domicilio entity = DomicilioDto.ToUnMap(dto,null);
                         cliente.Domicilios.Add(entity);
                         int nrecords = context.SaveChanges();
                         transaction.Commit();
@@ -70,7 +70,7 @@ namespace com.Yolia.App.Data.Service
             {
                 if (item != null)
                 {
-                    Domicilio entity = DomicilioDto.ToUnMap(dto);
+                    Domicilio entity = DomicilioDto.ToUnMap(dto,null);
                     context.Entry<Domicilio>(entity).State = 
                         System.Data.Entity.EntityState.Modified;
                     int nrecords = context.SaveChanges();

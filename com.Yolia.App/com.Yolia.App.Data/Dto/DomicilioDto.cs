@@ -18,34 +18,45 @@ namespace com.Yolia.App.Data.Dto
         public string Colonia { get; set; }
         public string Estado { get; set; }
         public string CodPostal { get; set; }
-        public int ClienteClienteId { get; set; }
+        public virtual Cliente Cliente { get; set; }
 
-        internal static List<DomicilioDto> ToMap(List<Domicilio> listEntity)
+        internal static List<DomicilioDto> ToMap(List<Domicilio> list)
         {
-            List<DomicilioDto> listDto = (from entity in listEntity select ToMap(entity)).ToList();
+            List<DomicilioDto> listDto = new List<DomicilioDto>();
+            if (list == null)
+                return listDto;
+            list.ForEach(e => listDto.Add(ToMap(e,null)));
             return listDto;
         }
 
-        internal static DomicilioDto ToMap(Domicilio entity)
+        internal static DomicilioDto ToMap(Domicilio entity, DomicilioDto dto)
         {
-            if (entity == null) return null;
-            TinyMapper.Bind<Domicilio, DomicilioDto>(config =>
-            {
-                config.Bind(a => a.DomicilioId, b => b.DomicilioId);
-            });
-            var dto = TinyMapper.Map<DomicilioDto>(entity);
-            return dto;
+            if (dto == null) dto = new DomicilioDto();
 
+            dto.Calle = entity.Calle;
+            dto.Cliente = entity.Cliente;
+            dto.CodPostal = entity.CodPostal;
+            dto.Colonia = entity.Colonia;
+            dto.DomicilioId = entity.DomicilioId;
+            dto.Estado = entity.Estado;
+            dto.NumExterior = entity.NumExterior;
+            dto.NumInterior = entity.NumInterior;
+            return dto;
         }
-        internal static Domicilio ToUnMap(DomicilioDto dto)
+
+        internal static Domicilio ToUnMap(DomicilioDto dto,Domicilio entity)
         {
             if (dto == null) return null;
-            TinyMapper.Bind<DomicilioDto, Domicilio>(config =>
-            {
-                config.Ignore(_dto => _dto.ClienteClienteId);
-                config.Bind(a => a.DomicilioId, b => b.DomicilioId);
-            });
-            Domicilio entity = TinyMapper.Map<Domicilio>(dto);
+            if (entity == null) entity = new Domicilio();
+
+            entity.Calle = dto.Calle;
+            entity.Cliente = dto.Cliente;
+            entity.CodPostal = dto.CodPostal;
+            entity.Colonia = dto.Colonia;
+            entity.Estado = dto.Estado;
+            entity.NumExterior = dto.NumExterior;
+            entity.NumInterior = dto.NumInterior;
+            entity.DomicilioId = dto.DomicilioId;
             return entity;
         }
 

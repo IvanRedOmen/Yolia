@@ -12,7 +12,8 @@ namespace com.Yolia.App.Data.Dto
   
         public ClienteDto()
         {
-            Domicilios = new List<DomicilioDto>();
+            Domicilios = new DomicilioDto();
+            Servicios = new List<ServicioDto>();
         }
 
         public int ClienteId { get; set; }
@@ -22,7 +23,7 @@ namespace com.Yolia.App.Data.Dto
         public string ApellidoMaterno { get; set; }
         public string NumFijo { get; set; }
         public string NumMovil { get; set; }
-        public List<DomicilioDto> Domicilios { get; set; }
+        public DomicilioDto Domicilios { get; set; }
         public List<ServicioDto> Servicios { get; set; }
 
         internal static List<ClienteDto> ToMap(List<Cliente> listEntity)
@@ -53,10 +54,8 @@ namespace com.Yolia.App.Data.Dto
                 entity.Nombre = dto.Nombre;
                 entity.NumFijo = dto.NumFijo;
                 entity.NumMovil = dto.NumMovil;
-            //entity.Domicilios = DomicilioDto.ToUnMap(dto.Domicilios.OfType<DomicilioDto>().ToList());
-            entity.Domicilios = DomicilioDto.ToMap(dto.Domicilios.ToList());
+                entity.Domicilios = DomicilioDto.ToMap(dto.Domicilios);
                 return entity;
-
         }
 
     }
