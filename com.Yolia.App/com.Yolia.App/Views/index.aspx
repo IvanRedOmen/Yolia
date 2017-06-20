@@ -3,6 +3,6 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <div align="center"> 
-        <img src="../assets/Encabezado Yolia 2 NEW.png" border="0" style="width: 820px; height: 96px"/>
+        <img src="assets/Encabezado Yolia 2 NEW.png" />
     </div>
 </asp:Content>
