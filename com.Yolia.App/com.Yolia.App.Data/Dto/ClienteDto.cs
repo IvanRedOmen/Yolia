@@ -54,7 +54,7 @@ namespace com.Yolia.App.Data.Dto
                 entity.Nombre = dto.Nombre;
                 entity.NumFijo = dto.NumFijo;
                 entity.NumMovil = dto.NumMovil;
-                entity.Domicilios = DomicilioDto.ToMap(dto.Domicilios);
+                entity.Domicilios = DomicilioDto.ToUnMap(dto);
                 return entity;
         }
 
